@@ -40,6 +40,6 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
     - name: Tomcat deploy
-      run: curl -v -u ${{ secrets.TOM_USERNAME }}:${{ secrets.TOM_PASSWD }} -T /home/runner/work/mvn-b6/mvn-b6/target/flipkart1.war 'http://34.125.172.7:8080/manager/text/deploy?path=/Welcome'
+      run: curl -v -u ${{ secrets.TOM_USERNAME }}:${{ secrets.TOM_PASSWD }} -T /home/runner/work/mvn-b6/mvn-b6/target/flipkart1.war 'http://34.125.112.55:8080/manager/text/deploy?path=/Welcome'
 
    
