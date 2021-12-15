@@ -35,27 +35,9 @@ jobs:
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Build and analyze
-      env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-    - name: 'Publish Test Report'
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-          name: 'test-reports'
-          path: |
-             target/*.html
-             target/site/
-             ./anchore-reports/
     - name: Deploy to GitHub
       run: mvn --batch-mode -DuseGitHubPackages=true deploy
       env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
     - name: Tomcat deploy
-      run: curl -v -u ${{ secrets.TOM_USERNAME }}:${{ secrets.TOM_PASSWD }} -T /home/runner/work/mvn-b6/mvn-b6/target/flipkart1.war 'http://34.125.112.55:8080/manager/text/deploy?path=/Welcome'
-    
-
-   
+      run: curl -v -u ${{ secrets.TOM_USERNAME }}:${{ secrets.TOM_PASSWD }} -T /home/runner/work/mvn-b6/mvn-b6/target/flipkart1.war 'http://34.125.112.55:8080/manager/text/deploy?path=/Welcome2'
