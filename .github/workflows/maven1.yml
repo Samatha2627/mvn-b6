@@ -36,7 +36,7 @@ jobs:
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
-      run: curl -u admin:admin http://34.125.196.119:9000/web_api/api/qualitygates/project_status
+      run: curl -u admin:admin http://34.125.196.119:9000/web_api/api/qualitygates/project_status?projectKey=mvn-b6
     - name: Deploy to GitHub
       run: mvn --batch-mode -DuseGitHubPackages=true deploy
       env:
