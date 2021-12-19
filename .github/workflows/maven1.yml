@@ -36,11 +36,10 @@ jobs:
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: execute py script
-      id: py_scr
       run:  |
         python poc_sonar_api.py
     - run: |
-       echo "${{fromJson(py_scr.outputs.metric).ncloc}}"  
+       echo "${{fromJson(outputs.metric).ncloc}}"  
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
