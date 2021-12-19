@@ -36,10 +36,8 @@ jobs:
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: execute py script
-      run:  |
-        python poc_sonar_api.py
-    - run: |
-       echo "${{fromJson(outputs.metric).ncloc}}"  
+      run: |
+       echo "requests.get('http://34.125.196.119:9000/api/measures/component',auth=HTTPBasicAuth(username="admin", password="admin"), verify=False,params=PARAM).json()"  
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
