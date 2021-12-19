@@ -35,6 +35,11 @@ jobs:
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: execute py script
+      run:  |
+        python poc_sonar_api.py
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
       run: curl -u admin:admin http://34.125.196.119:9000/web_api/api/qualitygates/project_status?projectKey=mvn-b6
     - name: Deploy to GitHub
@@ -43,4 +48,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
     - name: Tomcat deploy
       run: curl -v -u ${{ secrets.TOM_USERNAME }}:${{ secrets.TOM_PASSWD }} -T /home/runner/work/mvn-b6/mvn-b6/target/flipkart1.war 'http://34.125.112.55:8080/manager/text/deploy?path=/Welcome2'
-      
