@@ -37,7 +37,7 @@ jobs:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: execute py script
       run: |
-       print(requests.get('http://34.125.196.119:9000/api/measures/component',auth=HTTPBasicAuth(username="admin", password="admin"), verify=False,params={'component': 'mvn-b6', 'metricKeys': 'code_smells,bugs,vulnerabilities,ncloc,coverage'}).json()) 
+       print((requests.get('http://34.125.196.119:9000/api/measures/component',auth=HTTPBasicAuth(username="admin", password="admin"), verify=False,params={'component': 'mvn-b6', 'metricKeys': 'code_smells,bugs,vulnerabilities,ncloc,coverage'})).json()) 
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
