@@ -40,7 +40,7 @@ jobs:
       run:  |
         python poc_sonar_api.py
     - run: |
-       echo "${{fromJson(py_scr.outputs.metric}.ncloc}"  
+       echo "${{fromJson(py_scr.outputs.metric).ncloc}}"  
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
