@@ -35,10 +35,11 @@ jobs:
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Run Gosec Security Scanner
-      run: |
-          go get github.com/securego/gosec/cmd/gosec
-          gosec -no-fail -fmt=sonarqube -out report.json ./...
+    - name: execute py script
+      run:  |
+        python poc_sonar_api.py
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Sonar Project status
       run: curl -u admin:admin http://34.125.196.119:9000/web_api/api/qualitygates/project_status?projectKey=mvn-b6
     - name: Deploy to GitHub
