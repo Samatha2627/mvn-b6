@@ -24,10 +24,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Install Tanzu
-      run: |
-       sudo install core/v1.4.0/tanzu-core-linux_amd64 /usr/local/bin/tanzu
-       ls
+    - name: Install Kubectl
+      uses: Azure/setup-kubectl@v1
+      with:
+          version: latest
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
