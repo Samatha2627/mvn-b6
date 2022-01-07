@@ -28,6 +28,14 @@ jobs:
       uses: Azure/setup-kubectl@v1
       with:
           version: latest
+    - name: Install Tanzu
+      run: |
+         curl -H "Accept: application/vnd.github.v3.raw" \ -L https://api.github.com/repos/vmware-tanzu/community-edition/contents/hack/get-tce-release.sh | \bash -s v0.9.1 linux
+         tar -xvf tce-linux-amd64-v0.9.1.tar.gz
+         cd tce-linux-amd64-v0.9.1
+         ./install.sh
+         tanzu version
+         tanzu plugin list
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
