@@ -124,6 +124,7 @@ jobs:
     - name: Tanzu login
       run: |
          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+         tanzu login
          tanzu management-cluster create -y
          tanzu management-cluster get
      #tanzu login --endpoint https://MANAGEMENT-CLUSTER-CONTROL-PLANE-ENDPOINT:6443 --name TKG-ENVIRONMENT
