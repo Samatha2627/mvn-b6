@@ -85,8 +85,10 @@ jobs:
          mv conftest /usr/local/bin/conftest 
          conftest --version
     - name: Kubeseal Installation
+      env:
+         KSVERSION: 0.16.0
       run: |
-        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 -O kubeseal
+        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KSVERSION}/kubeseal-linux-amd64 -O kubeseal
         sudo install -m 755 kubeseal /usr/local/bin/kubeseal
         kubeseal --version
         
@@ -94,7 +96,7 @@ jobs:
       env:
          YQVERSION: 4.16.2
       run: |
-        curl -sLO https://github.com/mikefarah/yq/releases/download/v{YQVERSION}/yq_linux_arm64.tar.gz
+        curl -sLO https://github.com/mikefarah/yq/releases/download/v${YQVERSION}/yq_linux_arm64.tar.gz
         tar -xvzf yq_linux_arm64.tar.gz 
         sudo chmod 755 yq_linux_arm64 
         sudo mv yq_linux_arm64 /usr/bin/yq
