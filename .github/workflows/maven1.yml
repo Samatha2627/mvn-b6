@@ -49,9 +49,11 @@ jobs:
            # Add permission for executable
            chmod +x "${BIN_DIR}/kustomize"
     - name: Helm V3 Installation
+      env:
+         HELMVERSION: 3.0.2
       run:  |
-         curl -sLO https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz 
-         tar xvf helm-v3.0.2-linux-amd64.tar.gz 
+         curl -sLO https://get.helm.sh/helm-v${HELMVERSION}-linux-amd64.tar.gz 
+         tar xvf helm-v${HELMVERSION}-linux-amd64.tar.gz 
          sudo mv linux-amd64/helm /usr/local/bin/
          helm version
  
@@ -83,27 +85,36 @@ jobs:
          mv conftest /usr/local/bin/conftest 
          conftest --version
     - name: Kubeseal Installation
+      env:
+         KSEALVERSION: 0.16.0
       run: |
-        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 -O kubeseal
+        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v{KSEALVERSION}/kubeseal-linux-amd64 -O kubeseal
         sudo install -m 755 kubeseal /usr/local/bin/kubeseal
         kubeseal --version
+        
     - name: yq Installation
+      env:
+         YQVERSION: 4.16.2
       run: |
-        curl -sLO https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_arm64.tar.gz
+        curl -sLO https://github.com/mikefarah/yq/releases/download/v{YQVERSION}/yq_linux_arm64.tar.gz
         tar -xvzf yq_linux_arm64.tar.gz 
         sudo chmod 755 yq_linux_arm64 
         sudo mv yq_linux_arm64 /usr/bin/yq
+        
     - name: jq Installation
       run: |
         curl -sLO https://github.com/stedolan/jq/releases/latest/download/jq-linux64
         sudo mv jq-linux64 /usr/local/bin/jq 
         sudo chmod +x /usr/local/bin/jq 
         jq --version
+        
     - name: Install Tanzu
+      env:
+         TANZUVERSION: 0.9.1
       run: |
-         curl -H "Accept: application/vnd.github.v3.raw" \ -L https://api.github.com/repos/vmware-tanzu/community-edition/contents/hack/get-tce-release.sh | \bash -s v0.9.1 linux
-         tar -xvf tce-linux-amd64-v0.9.1.tar.gz
-         cd tce-linux-amd64-v0.9.1
+         curl -H "Accept: application/vnd.github.v3.raw" \ -L https://api.github.com/repos/vmware-tanzu/community-edition/contents/hack/get-tce-release.sh | \bash -s v{TANZUVERSION} linux
+         tar -xvf tce-linux-amd64-v{TANZUVERSION}.tar.gz
+         cd tce-linux-amd64-v{TANZUVERSION}
          ./install.sh
          tanzu version
          tanzu plugin list
