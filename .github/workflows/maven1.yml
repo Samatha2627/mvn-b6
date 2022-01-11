@@ -85,10 +85,8 @@ jobs:
          mv conftest /usr/local/bin/conftest 
          conftest --version
     - name: Kubeseal Installation
-      env:
-         KSEALVERSION: 0.16.0
       run: |
-        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v{KSEALVERSION}/kubeseal-linux-amd64 -O kubeseal
+        wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 -O kubeseal
         sudo install -m 755 kubeseal /usr/local/bin/kubeseal
         kubeseal --version
         
