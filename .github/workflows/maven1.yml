@@ -123,8 +123,8 @@ jobs:
          
     - name: Tanzu login
       run: |
-        tanzu cluster list
-       #tanzu login --endpoint https://MANAGEMENT-CLUSTER-CONTROL-PLANE-ENDPOINT:6443 --name TKG-ENVIRONMENT
+         tanzu management-cluster create --ui
+     #tanzu login --endpoint https://MANAGEMENT-CLUSTER-CONTROL-PLANE-ENDPOINT:6443 --name TKG-ENVIRONMENT
     
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
